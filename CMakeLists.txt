@@ -1,0 +1,10 @@
+idf_component_register(
+    SRCS
+        "utility.cc"
+    INCLUDE_DIRS
+        "include"
+    EMBED_TXTFILES
+    REQUIRES
+    	"esp_timer"
+        "mbedtls"
+)
