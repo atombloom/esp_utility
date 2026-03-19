@@ -113,3 +113,17 @@ void ExampleUsage()
 - 如使用 CPU 使用率统计相关接口，请确保在 `menuconfig` 中启用了CONFIG_FREERTOS_GENERATE_RUN_TIME_STATS
 - 与时间相关的功能依赖 SNTP 或其他方式确保系统时间已经同步，否则返回的时间戳或本地时间字符串可能不准确。
 - Base64 解码接口在输入非法字符串或长度为 0 时会返回空的 `std::vector<uint8_t>`，同时输出错误日志，可根据返回值进行错误处理。
+
+## 更新
+
+### 1.0.0
+* 版本提交
+
+
+
+
+
+
+
+
+
