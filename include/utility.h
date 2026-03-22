@@ -31,6 +31,8 @@ public:
     static std::string LocalTimeStrHM();
     static std::string LocalTimeStrHMS();
     static std::string LocalTimeHumanReadableString();
+    static std::string GetMacNumberString();
+    static std::string GetSnByMac();
 
 private:
 };

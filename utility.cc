@@ -2,6 +2,7 @@
 #include <esp_log.h>
 #include <esp_random.h>
 #include <esp_sntp.h>
+#include <esp_mac.h>
 
 #include <cstring>
 #include <ctime>
@@ -393,4 +394,35 @@ std::string Utility::LocalTimeHumanReadableString() {
     char buf[32];
     snprintf(buf, sizeof(buf), "%s%d点%02d分", prefix, display_hour, timeinfo.tm_min);
     return std::string(buf);
+}
+
+//MAC to int64_t number string: 1234567890
+std::string Utility::GetMacNumberString() {
+    uint8_t mac[6];
+    esp_err_t ret;
+#if CONFIG_IDF_TARGET_ESP32P4
+    ret = esp_wifi_get_mac(WIFI_IF_STA, mac);
+#else
+    ret = esp_read_mac(mac, ESP_MAC_WIFI_STA);
+#endif
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to get MAC address, error: %d", ret);
+        return std::string("");
+    }
+    // 将 6 个字节的 MAC 地址组合成一个 int64_t 数字
+    // 使用掩码确保只使用低 48 位，避免符号位被影响，保证结果始终为正数
+    int64_t mac_number = (((int64_t)mac[0] << 40) | 
+                          ((int64_t)mac[1] << 32) | 
+                          ((int64_t)mac[2] << 24) | 
+                          ((int64_t)mac[3] << 16) | 
+                          ((int64_t)mac[4] << 8) | 
+                          (int64_t)mac[5]) & 0x0000FFFFFFFFFFFFLL;
+    return std::to_string(mac_number);
+}
+
+//MAC to SN string: SN1234567890
+std::string Utility::GetSnByMac() {
+    std::string mac_sn("SN");
+    mac_sn += GetMacNumberString();
+    return mac_sn;
 }
