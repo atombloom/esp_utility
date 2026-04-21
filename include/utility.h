@@ -21,7 +21,7 @@ public:
     static float GetCoreUsage(int core_id);
     static std::string Base64Encode(const uint8_t* data, size_t size);
     static std::vector<uint8_t> Base64Decode(const char* base64_str, size_t base64_len);
-    static std::string GetTimestampISO8061();
+    static std::string GetTimestampISO8601();
     static int64_t LocalTimeStrToTimestamp(const char* time_str, const char* timezone = "CST-8");
     static std::string LocalTimestampToTimeStr(int64_t timestamp);
     static std::string FormatInt64(int64_t value);

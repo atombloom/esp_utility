@@ -187,7 +187,7 @@ std::vector<uint8_t> Utility::Base64Decode(const char* base64_str, size_t base64
  * @return  返回时间日期字符串: "2024-10-22T10:40:29.123456+08:00" (ISO 8601 格式)
  */
 #define TOOL_TIMESTR_LENGTH 64
-std::string Utility::GetTimestampISO8061() {
+std::string Utility::GetTimestampISO8601() {
     char timestr[TOOL_TIMESTR_LENGTH];
     memset(timestr, 0, TOOL_TIMESTR_LENGTH);
     time_t now;
